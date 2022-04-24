@@ -1,6 +1,34 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+const {
+  PHASE_DEVELOPMENT_SERVER,
+  PHASE_PRODUCTION_BUILD,
+  PHASE_PRODUCTION_SERVER,
+  PHASE_EXPORT,
+} = require("next/constants");
 
-module.exports = nextConfig
+module.exports = (phase, { defaultConfig }) => {
+  console.log(phase);
+  const url = "/fbclone";
+  const Img = {
+    domains: ["res.cloudinary.com",],
+  }
+
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      reactStrictMode: true,
+      env: {
+        PREFIX: "",
+      },
+      images: Img,
+    };
+  }
+
+  return {
+    reactStrictMode: true,
+    basePath: `${url}`,
+    assetPrefix: `${url}/`,
+    env: {
+      PREFIX: `${url}`,
+    },
+    images: Img,
+  };
+};
