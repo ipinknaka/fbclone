@@ -13,7 +13,14 @@ export default function Home() {
       <main>
 
       </main>
-
+      
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  console.log("index-getServerSideProps")
+  return {
+    props: {},
+  }
 }
