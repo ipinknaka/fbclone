@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Header from '../components/Header'
+import { getSession } from 'next-auth/react'
 
 export default function Home() {
   return (
@@ -13,14 +14,16 @@ export default function Home() {
       <main>
 
       </main>
-      
+
     </div>
   )
 }
 
 export async function getServerSideProps(context) {
-  console.log("index-getServerSideProps")
+  const session = await getSession(context);
+  console.log("index-getServerSideProps");
+  console.log(`session: ${session}`);
   return {
-    props: {},
+    props: { session },
   }
 }
